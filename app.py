@@ -30,13 +30,15 @@ def dashboard():
 <html>
 <head>
 <title>System Health Monitor</title>
-<meta http-equiv = "refresh" content = "3">
 
 <style>
 body{{
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg,#0f172a,#1e293b);
+      background: #0f172a;
+
+      background-image: linear-gradient(135deg, #0f172a, #1e293b);
+
       color: #e2e8f0;
       display: flex;
       justify-content: center;
@@ -49,8 +51,8 @@ body{{
    padding: 35px;
    background: rgba(255,255,255,0.05);
    border-radius: 16px;
-   box-shadow: 0 20 40px rgba(0,0,0,0.6);
-   background-filter: blur(10px);
+   box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+   background-filter: blur(12px);
 }}
 
 h1{{
@@ -137,4 +139,4 @@ h3{{
 </html>
 """
 
-app.run(debug = True)
+app.run(host = "0.0.0.0", port = 5000, debug = True)
