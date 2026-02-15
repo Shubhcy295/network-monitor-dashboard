@@ -1,6 +1,6 @@
 # System Health Monitoring Dashboard
 
-A lightweight Flask-based monitoring dashboard designed to simulate basic network sytem monitoring.
+A lightweight Flask-based monitoring dashboard designed to simulate basic network system monitoring.
 
 --
 
@@ -11,7 +11,7 @@ A lightweight Flask-based monitoring dashboard designed to simulate basic networ
 - Disk space monitoring
 - Auto refresh every 3 Seconds
 - IST timezone display
-- dynamic alert color system 
+- Dynamic alert color system 
 
 --
 
