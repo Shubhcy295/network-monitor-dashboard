@@ -15,6 +15,12 @@ A lightweight Flask-based monitoring dashboard designed to simulate basic networ
 
 --
 
+## Screenshot
+
+![Dashboard Screenshot](screenshots/dashboard.png)
+
+--
+
 # Tech Stack 
 
 - Python
