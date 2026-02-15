@@ -1,0 +1,114 @@
+from flask import Flask 
+import psutil,socket
+from datetime import datetime
+import pytz 
+
+# Create Flask app(name string)
+app = Flask("monitor")
+
+@app.route("/")
+def dashboard():
+
+  # System Data
+  node = socket.gethostname()
+  cpu = psutil.cpu_percent(interval=1)
+  memory = psutil.virtual_memory().percent
+  disk = psutil.disk_usage("/").percent
+
+  # Correct IST Time
+  ist = pytz.timezone("Asia/Kolkata")
+  current_time = datetime.now(ist).strftime("%d %b %Y - %H:%M IST")
+
+  return f"""
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>System Health Monitor</title>
+<meta http-equiv = "refresh" content = "3">
+
+<style>
+body{{
+      margin: 0;
+      font-family: Aria
+      background: linear-gradient(135deg,#0f172a,#1e293b);
+      color: #e2e8f0;
+      text-align: center;
+}}
+
+.card{{
+   width: 500px;
+   margin: 80px auto;
+   padding: 25px;
+   background: #1e293b;
+   border-radius: 15px;
+}}
+
+h1{{
+   text-align: center;
+   color: #38bdf8;
+}}
+
+.line{{ 
+   margin: 10px 0;
+   font-size: 18px;
+}}
+
+.bar{{
+   height: 10px;
+   background: #334155;
+   border-radius: 8px;
+   margin-bottom: 20px;
+   overflow: hidden;
+}}
+
+.fill{{
+   height: 100%;
+   border-radius: 5px;
+}}
+
+.cpu{{ width:{cpu}%; background:#f59e0b; }}
+.mem{{ width:{memory}%; background:#38bdf8; }}
+.disk{{ width:{disk}%; background:#22c55e; }}
+
+.footer{{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #94a3b8;
+}}
+
+</style>
+</head>
+
+<body>
+
+   <div class = "card">
+    <h1>System Health Monitor</h1>
+
+   <h3>Node Info></h3>
+   Host: {hostname} <br>
+   Status: Active<br>
+   Auto Refresh: 3 Second <br></br>
+
+   <h3>System Usage</h3>
+
+     CPU:{cpu}%
+     <div class = "bar"><div class = "fill cpu"></div></div>
+
+     Memory: {memory}%
+     <div class = "bar"><div class = "fill memory"></div></div>
+
+     Disk:{disk}%
+     <div class = "bar"><div class = "fill disk"></div></div>
+
+     <div class = "footer">
+       Last Updated: {current_time}
+     </div>
+   </div>
+
+</body>
+</html>
+"""
+
+app.run()
